@@ -21,10 +21,12 @@ import java.util.concurrent.TimeUnit;
 
 public class City {
     Scanner in = new Scanner(System.in);
+    Appearance A = new Appearance();
 
 
     public void theCity(Player P) throws InterruptedException, IOException {
-        System.out.println("\n=-=-=-=-=-= THE CITY =-=-=-=-=-=");
+        String text = A.strikethrough("THE CITY",7,'=','-');
+        A.putInBox(text,'+');
         TimeUnit.SECONDS.sleep(1);
         System.out.print("\n\tVisit the (S)hop\n\t(E)xplore the theCity\n\t(Q)uest Board\n\t(V)enture Out\n\t>>>");
         String str = in.next();
@@ -45,9 +47,11 @@ public class City {
 
 
     public void shop(Player P) throws InterruptedException, IOException {
-        System.out.println("\n=-=-=-=-=-= HEDMAZ'S WARES =-=-=-=-=-=");
+        String text = A.strikethrough("HEDMA'S WARES",7,'=','-');
+        A.putInBox(text,'+');
         TimeUnit.SECONDS.sleep(1);
-        System.out.println("\n\t PURCHASE\n\t==========\n\t(P)otions (9 coins) \n\t(W)eapons\n\t(L)eave\n\t>>>");
+        text = A.strikethrough("PURCHASE ",7,'=','-');
+        System.out.println(text+"\n\t(P)otions (9 coins) \n\t(W)eapons\n\t(L)eave\n\t>>>");
         String str = in.next();
 
 
@@ -120,38 +124,16 @@ public class City {
 
     public void questBoard(){
         System.out.println("\n\"\"Coming soon in the Expansion Pack!\"\"");
-        return ;
     }
 
-    public void exploreCity() throws InterruptedException {
+    public void exploreCity() throws InterruptedException, IOException {
         TimeUnit.SECONDS.sleep(1);
         System.out.println("You meet a Villager.");
         TimeUnit.MILLISECONDS.sleep(400);
         System.out.println(" \"\" ");
-        /*
-        Prints a random dialogue from DeathDialoguesPlayer file
-         */
-        Random R = new Random();
-        int i = R.nextInt(6);
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader("/home/tulsi/NetBeansProjects/CatfishFiles/Resources/VillagerDialogues"))) {
-            String line = bufferedReader.readLine();
-            while(line != null) {
-                if(line.equalsIgnoreCase(String.valueOf(i))){
-                    line = bufferedReader.readLine();
-                    System.out.println(line );
-                    break;
-                }else{
-                    line = bufferedReader.readLine();
-                }
-            }
-        } catch (FileNotFoundException e) {
-            // exception handling
-        } catch (IOException e) {
-            // exception handling
-        }
-
+        Villager V = new Villager();
+        System.out.println(V.name +"\n"+ V.dialogue);
         System.out.println(" \"\" ");
-
     }
 
     public void ventureOut(Player P) throws IOException, InterruptedException {
