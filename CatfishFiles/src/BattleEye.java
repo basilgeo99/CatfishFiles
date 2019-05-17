@@ -23,6 +23,7 @@ public class BattleEye {
     Random R = new Random();
     Appearance A = new Appearance();
     Scanner in = new Scanner(System.in);
+    FileAccess F = new FileAccess();
     Enemy E;
     Player P;
     ExcelRW mainX;
@@ -85,7 +86,7 @@ public class BattleEye {
             System.out.println("\n"+E.name+" makes away with all your "+P.coins+" coins.");
         }
         
-        String output = "/home/adama/Documents/(6) Miscellaneous/Basil Stupid Game/" + this.P.name + ".xls";
+        String output = F.PresentWorkingDirectory() + this.P.name + ".xls";
         mainX.setOutputFile(output);
         mainX.write(this.P);
 

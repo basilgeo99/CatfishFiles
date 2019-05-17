@@ -29,13 +29,13 @@ public class Villager {
 
     public String nameSelector() throws FileNotFoundException, IOException {
       
-        return F.ResourceDirectory("VillagerNames");
+        return F.RandomTextfromFile("VillagerNames");
 
     }
 
     private String dialogueSelector() throws IOException {
         
-        return F.ResourceDirectory("VillagerDialogues");
+        return F.RandomTextfromFile("VillagerDialogues");
 
     }
 

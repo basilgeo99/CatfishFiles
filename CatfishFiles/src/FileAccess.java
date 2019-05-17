@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public class FileAccess {
 
-    public String ResourceDirectory(String fileName) throws IOException {
+    public String RandomTextfromFile(String fileName) throws IOException {
         /*
             RETURNS THE DIRECTORY WHERE THE RESOURCE FILES ARE STORED 
             DEPENDING ON WHETHER IT IS A LINUX OR WINDOWS MACHINE
@@ -36,6 +36,19 @@ public class FileAccess {
         return result;
 
     }
+    
+     public String PresentWorkingDirectory() throws IOException {
+        String os = System.getProperty("os.name");
+        String directory = System.getProperty("user.dir");
+
+        if (os.contains("Linux")) {
+            directory += "/Resources/";
+        } else if (os.contains("Windows")) {
+            directory += "\\Resources\\";
+        }
+        return directory;
+         
+     }
 
     private int lineCount(String fileLocation) throws FileNotFoundException, IOException {
         /*
