@@ -26,7 +26,7 @@ public class Appearance {
 
     public void putInBox(String line,char cornerCharacter) {
         /**
-         * Takes a string and puts it in a box made of '-' amd '|' with
+         * Takes a string and puts it in a box made of '-' and '|' with
          * cornerCharacters used for the corners of the box
          */
         this.cornerCharacter = cornerCharacter;

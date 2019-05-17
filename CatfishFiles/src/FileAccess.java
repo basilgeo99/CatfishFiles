@@ -38,6 +38,12 @@ public class FileAccess {
     }
 
     private int lineCount(String fileLocation) throws FileNotFoundException, IOException {
+        /*
+            Return the number of line of text in the file
+            we use count/2 because in our textfile every  line of 
+            text is preceeded by an identifying number.
+            So the actual number of lines of text is only half the overall lines.
+        */
         BufferedReader reader = new BufferedReader(new FileReader(fileLocation));
         int lines = 0;
         while (reader.readLine() != null) {
@@ -49,6 +55,12 @@ public class FileAccess {
     }
 
     private String randomPull(String fileLocation, int bound) throws FileNotFoundException {
+        /*
+            A a random line of text is pulled from the file supplied.
+            Bound is an interger that determines the bound of random number to be
+            generated.
+            The random number is used to select a random line from the text file
+        */
         Random R = new Random();
         int i = R.nextInt(bound);
         FileReader fr = new FileReader(fileLocation);
