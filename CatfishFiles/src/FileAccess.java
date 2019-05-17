@@ -18,10 +18,20 @@ import jxl.write.WriteException;
 public class FileAccess {
     ExcelRW excelObject =  new ExcelRW();
     
+    
+    /*
+        THE BELOW DEFINED ENUM IS USED SO THAT THE SAME CLASS CAB BE USED FOR BOTH
+            save AND  resource  FOLDER ACESS DEPENDING ON WHICH ENUM VALUE ID PASSED.
+    */
+    public enum FileType{
+        SAVE,
+        RESOURCE
+    }
+    
 
     public String RandomTextfromFile(String fileName) throws IOException {
 
-        String home = PresentWorkingDirectory();
+        String home = ResourceDirectory(FileType.RESOURCE);
         String fileLocation = home + fileName;
         int bound = lineCount(fileLocation);
         Random R = new Random();
@@ -47,17 +57,23 @@ public class FileAccess {
 
     }
 
-    public String PresentWorkingDirectory() throws IOException {
+    public String ResourceDirectory(FileType type ) throws IOException {
         String os = System.getProperty("os.name");
         String directory = System.getProperty("user.dir");
+        String folder = "";
+        
+        if(type.equals(FileType.RESOURCE)){
+            folder = "resources"   ;         
+        }else if(type.equals(FileType.SAVE)){
+            folder="saves";
+        }
 
         if (os.contains("Linux")) {
-            directory += "/Resources/";
+            directory += "/Files/"+folder+"/";
         } else if (os.contains("Windows")) {
-            directory += "\\Resources\\";
+            directory += "\\Files\\"+folder+"\\";
         }
         return directory;
-
     }
 
     private int lineCount(String fileLocation) throws FileNotFoundException, IOException {
@@ -78,7 +94,7 @@ public class FileAccess {
     }
 
     public void  SaveGame(Player P) throws IOException, WriteException {
-        String output = PresentWorkingDirectory() + P.name + ".xls";
+        String output = ResourceDirectory(FileType.SAVE) + P.name + ".xls";
         excelObject.setOutputFile(output);
         excelObject.write(P);
     }
