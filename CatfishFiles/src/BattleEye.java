@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import jxl.write.WriteException;
 
 /*
     THIS CLASS HANDLES THE BATTLES IN THE GAME
@@ -24,16 +25,17 @@ public class BattleEye {
     Scanner in = new Scanner(System.in);
     Enemy E;
     Player P;
-
+    ExcelRW mainX;
 
     /*a generic battle system*/
 
     public BattleEye(Player P){
         this.P = P;
+        this.mainX = new ExcelRW();
     }
 
     //Pass N for normal enemies and B for bosses
-    public void BattleRequest(String c) throws InterruptedException, IOException {
+    public void BattleRequest(String c) throws InterruptedException, IOException, WriteException {
         if(c.equalsIgnoreCase("b")) {
             E = Enemy.newBossInstance();
         }else{
@@ -45,7 +47,7 @@ public class BattleEye {
     }
 
     //All battles happen here at this function between 1 player and 1 enemy
-    private void StartBattle() throws InterruptedException, IOException {
+    private void StartBattle() throws InterruptedException, IOException, WriteException {
         TimeUnit.SECONDS.sleep(1);
 
         String text = A.strikethrough("BATTLE",7,'=','-');
@@ -82,6 +84,10 @@ public class BattleEye {
             P.coins = 0;
             System.out.println("\n"+E.name+" makes away with all your "+P.coins+" coins.");
         }
+        
+        String output = "/home/adama/Documents/(6) Miscellaneous/Basil Stupid Game/" + this.P.name + ".xls";
+        mainX.setOutputFile(output);
+        mainX.write(this.P);
 
     }
 
