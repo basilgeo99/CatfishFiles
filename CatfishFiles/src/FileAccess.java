@@ -26,8 +26,7 @@ public class FileAccess {
     public enum FileType{
         SAVE,
         RESOURCE
-    }
-    
+    }    
 
     public String RandomTextfromFile(String fileName) throws IOException {
 

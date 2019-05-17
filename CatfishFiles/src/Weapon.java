@@ -9,11 +9,14 @@ import java.util.Random;
     CHANGES TO BE MADE :
         1. MUST INTRODUCE A WEIGHT ATTRIBUTE FOR BAG CLASS PURPOSES
  */
-public class Weapon {
-    int dmg;
-    String name;
+public class Weapon extends Parent {
+   //String name;
+    int dmg;    
     int cost;
     Random R = new Random();
+
+    Weapon() {
+    }
 
     public String stats(){
         String stats = "\nName : "+name+"\nDMG : "+dmg+"\nCost : "+cost;
