@@ -15,9 +15,9 @@ public class Weapon {
     int cost;
     Random R = new Random();
 
-    public void stats(){
-        System.out.println("\n------" + name +" STATS------ ");
-        System.out.println("\nName : "+name+"\nDMG : "+dmg+"\nCost : "+cost);
+    public String stats(){
+        String stats = "\nName : "+name+"\nDMG : "+dmg+"\nCost : "+cost;
+        return stats;
     }
 
     Weapon (String name,int cost, int minDamage, int maxDamage){
@@ -33,14 +33,11 @@ public class Weapon {
     }
 
     /*
-
-
     THE DIFFERENT WEAPON CLASSES
 
     Iron --> Steel --> Glass --> BloodOak --> Dragon
 
     Special Class is separate and very rare.
-
      */
 
 
