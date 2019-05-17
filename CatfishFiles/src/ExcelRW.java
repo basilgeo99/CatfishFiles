@@ -1,23 +1,15 @@
-/*
-        Comment added by basil 
-
-
-
-more commenst ...whahahahahmuwhahaahah afj
-a lot of comments!!!1
-*/
-
-/*
-    Comment added by Muku Supreme
-*/
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
+import jxl.Cell;
+import jxl.CellType;
 
 import jxl.CellView;
+import jxl.Sheet;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
 import jxl.format.UnderlineStyle;
+import jxl.read.biff.BiffException;
 import jxl.write.Label;
 import jxl.write.Number;
 import jxl.write.WritableCellFormat;
@@ -50,6 +42,33 @@ public class ExcelRW {
 
         workbook.write();
         workbook.close();
+    }
+    
+    public void read(Player P) throws IOException  {
+        File inputWorkbook = new File(inputFile);
+        Workbook w;
+        try {
+            w = Workbook.getWorkbook(inputWorkbook);
+            // Get the first sheet
+            Sheet sheet = w.getSheet(0);
+            
+            // Loop over all rows in column 2 of SAVE file which contain the attribute values of Player.             
+            for (int i = 0; i < sheet.getRows(); i++) {
+                Cell cell = sheet.getCell(1, i);
+                CellType type = cell.getType();
+                if (type == CellType.NUMBER) {
+                    switch(i){
+                        case 0: P.hp = Integer.parseInt(cell.getContents()); break;
+                        case 1: P.dmg = Integer.parseInt(cell.getContents()); break;
+                        case 2: P.lvl = Integer.parseInt(cell.getContents()); break;
+                        case 3: P.coins = Integer.parseInt(cell.getContents()); break;
+                        case 4: P.potions = Integer.parseInt(cell.getContents()); break;
+                    }
+                }
+            }
+        } catch (BiffException e) {
+            e.printStackTrace();
+        }
     }
     
     private void createLabel(WritableSheet sheet)

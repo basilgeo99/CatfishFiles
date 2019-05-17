@@ -4,7 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
-
+import jxl.write.WriteException;
+import java.util.Scanner;
+import java.io.File;
 /*
  *  THIS CLASS DEALS WITH EXTERNAL FILE ACCESS
  *  IT IS A TYPE OF SUPPORTIVE CLASS THAT EXISTS TO
@@ -15,65 +17,24 @@ import java.util.Random;
  * @author tulsi
  */
 public class FileAccess {
-
-    public String RandomTextfromFile(String fileName) throws IOException {
-        /*
-            RETURNS THE DIRECTORY WHERE THE RESOURCE FILES ARE STORED 
-            DEPENDING ON WHETHER IT IS A LINUX OR WINDOWS MACHINE
-         */
-        String os = System.getProperty("os.name");
-        String home = System.getProperty("user.dir");
-
-        if (os.contains("Linux")) {
-            home += "/Resources/";
-        } else if (os.contains("Windows")) {
-            home += "\\Resources\\";
-        }
-
-        String fileLocation = home + fileName;
-        int bound = lineCount(fileLocation);
-        String result = randomPull(fileLocation, bound);
-        return result;
-
+    ExcelRW excelObject =  new ExcelRW();
+    
+    
+    /*
+        THE BELOW DEFINED ENUM IS USED SO THAT THE SAME CLASS CAB BE USED FOR BOTH
+            save AND  resource  FOLDER ACESS DEPENDING ON WHICH ENUM VALUE ID PASSED.
+    */
+    public enum FileType{
+        SAVE,
+        RESOURCE
     }
     
-     public String PresentWorkingDirectory() throws IOException {
-        String os = System.getProperty("os.name");
-        String directory = System.getProperty("user.dir");
 
-        if (os.contains("Linux")) {
-            directory += "/Resources/";
-        } else if (os.contains("Windows")) {
-            directory += "\\Resources\\";
-        }
-        return directory;
-         
-     }
+    public String RandomTextfromFile(String fileName) throws IOException {
 
-    private int lineCount(String fileLocation) throws FileNotFoundException, IOException {
-        /*
-            Return the number of line of text in the file
-            we use count/2 because in our textfile every  line of 
-            text is preceeded by an identifying number.
-            So the actual number of lines of text is only half the overall lines.
-        */
-        BufferedReader reader = new BufferedReader(new FileReader(fileLocation));
-        int lines = 0;
-        while (reader.readLine() != null) {
-            lines++;
-        }
-        reader.close();
-
-        return lines / 2;
-    }
-
-    private String randomPull(String fileLocation, int bound) throws FileNotFoundException {
-        /*
-            A a random line of text is pulled from the file supplied.
-            Bound is an interger that determines the bound of random number to be
-            generated.
-            The random number is used to select a random line from the text file
-        */
+        String home = ResourceDirectory(FileType.RESOURCE);
+        String fileLocation = home + fileName;
+        int bound = lineCount(fileLocation);
         Random R = new Random();
         int i = R.nextInt(bound);
         FileReader fr = new FileReader(fileLocation);
@@ -95,6 +56,67 @@ public class FileAccess {
 
         return "";
 
+    }
+
+    // function returns the path of directory
+    public String ResourceDirectory(FileType type ) throws IOException {
+        String os = System.getProperty("os.name");
+        String directory = System.getProperty("user.dir");  // variable stores user working directory
+        String folder = "";
+        
+        if(type.equals(FileType.RESOURCE)){
+            folder = "resources"   ;         
+        }else if(type.equals(FileType.SAVE)){
+            folder="saves";
+        }
+
+        if (os.contains("Linux")) {
+            directory += "/Files/"+folder+"/";
+        } else if (os.contains("Windows")) {
+            directory += "\\Files\\"+folder+"\\";
+        }
+        return directory;
+    }
+
+    private int lineCount(String fileLocation) throws FileNotFoundException, IOException {
+        /*
+            Return the number of line of text in the file
+            we use count/2 because in our textfile every  line of 
+            text is preceeded by an identifying number.
+            So the actual number of lines of text is only half the overall lines.
+         */
+        BufferedReader reader = new BufferedReader(new FileReader(fileLocation));
+        int lines = 0;
+        while (reader.readLine() != null) {
+            lines++;
+        }
+        reader.close();
+
+        return lines / 2;
+    }
+
+    public void  SaveGame(Player P) throws IOException, WriteException {
+        String output = ResourceDirectory(FileType.SAVE) + P.name + ".xls";
+        excelObject.setOutputFile(output);
+        excelObject.write(P);
+    }
+    
+    public Player LoadGame(Player P) throws IOException {
+        
+        String inputPathString = ResourceDirectory(FileType.SAVE) + P.name + ".xls";
+        File f = new File(inputPathString);
+        if(f.exists() && !f.isDirectory()) {
+            System.out.print("A player with the same name already exists. Load game? [Y/N]: ");
+            Scanner sc = new Scanner(System.in);
+            char ch = sc.next().charAt(0);
+                if(ch == 'y' || ch == 'Y'){
+                    ExcelRW test = new ExcelRW();
+                    test.setOutputFile(inputPathString);
+                    test.read(P);
+                }            
+        }
+        
+        return P;
     }
 
 }

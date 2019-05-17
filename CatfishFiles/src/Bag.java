@@ -13,12 +13,24 @@
         CHANGES TO BE MADE :
  */
 
-
 public class Bag {
-    int maxweight;
 
+    int maxweight;            // weight will be as in the number of items you can carry
+    Object[] items;
 
-    Bag(){
-        maxweight = 30;
+    Bag() {
+        maxweight = 12;
+        items = new Object[maxweight];
     }
+
+    public void inventory() {
+
+    }
+
+    /*
+    Object[] x = new Object[]{1,2,3,"srk"};
+            for(Object o: x){
+                System.out.println(o.getClass());
+            }
+     */
 }
