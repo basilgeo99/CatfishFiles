@@ -29,8 +29,9 @@ public class BattleEye {
 
     /*a generic battle system*/
 
-    public BattleEye(Player P){
+    public BattleEye(Player P) throws IOException {
         this.P = P;
+        F.LoadGame(P);
     }
 
     //Pass N for normal enemies and B for bosses

@@ -62,7 +62,7 @@ public class Enemy {
             Prints a random death dialogue for the enemy
          */
         FileAccess F = new FileAccess();
-        return F.RandomTextfromFile("DeathDialoguesEnemy");
+        return name+F.RandomTextfromFile("DeathDialoguesEnemy");
     }
 
     public static Enemy newRandomInstance() {

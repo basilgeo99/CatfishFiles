@@ -5,7 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 import jxl.write.WriteException;
-
+import java.util.Scanner;
+import java.io.File;
 /*
  *  THIS CLASS DEALS WITH EXTERNAL FILE ACCESS
  *  IT IS A TYPE OF SUPPORTIVE CLASS THAT EXISTS TO
@@ -26,8 +27,8 @@ public class FileAccess {
     public enum FileType{
         SAVE,
         RESOURCE
-    }    
-
+    }
+    
     public String RandomTextfromFile(String fileName) throws IOException {
 
         String home = ResourceDirectory(FileType.RESOURCE);
@@ -55,10 +56,10 @@ public class FileAccess {
         return "";
 
     }
-
+   
     public String ResourceDirectory(FileType type ) throws IOException {
         String os = System.getProperty("os.name");
-        String directory = System.getProperty("user.dir");
+        String directory = System.getProperty("user.dir");  // variable stores user working directory
         String folder = "";
         
         if(type.equals(FileType.RESOURCE)){
@@ -98,8 +99,20 @@ public class FileAccess {
         excelObject.write(P);
     }
     
-    public Player LoadGame(String name){
-        Player P = new Player();
+    public Player LoadGame(Player P) throws IOException {
+        
+        String inputPathString = ResourceDirectory(FileType.SAVE) + P.name + ".xls";
+        File f = new File(inputPathString);
+        if(f.exists() && !f.isDirectory()) {
+            System.out.print("A player with the same name already exists. Load game? [Y/N]: ");
+            Scanner sc = new Scanner(System.in);
+            char ch = sc.next().charAt(0);
+                if(ch == 'y' || ch == 'Y'){
+                    ExcelRW test = new ExcelRW();
+                    test.setOutputFile(inputPathString);
+                    test.read(P);
+                }            
+        }
         
         return P;
     }
