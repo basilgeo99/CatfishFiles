@@ -26,13 +26,11 @@ public class BattleEye {
     FileAccess F = new FileAccess();
     Enemy E;
     Player P;
-    ExcelRW mainX;
 
     /*a generic battle system*/
 
     public BattleEye(Player P){
         this.P = P;
-        this.mainX = new ExcelRW();
     }
 
     //Pass N for normal enemies and B for bosses
@@ -86,9 +84,8 @@ public class BattleEye {
             System.out.println("\n"+E.name+" makes away with all your "+P.coins+" coins.");
         }
         
-        String output = F.PresentWorkingDirectory() + this.P.name + ".xls";
-        mainX.setOutputFile(output);
-        mainX.write(this.P);
+        F.SaveGame(P);    // a cleaner way to save the game ... this way when we want to save game 
+                                          // we just call the FileAccess.SaveGame function and pass a Player object.
 
     }
 
