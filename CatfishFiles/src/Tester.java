@@ -18,29 +18,7 @@ public class Tester {
 
     Scanner in = new Scanner(System.in);
    
-    
-//
-//    public int LuckyDraw(int x) {
-//        Random R = new Random();
-//        int[] arr = new int[x + 1];
-//        final int constant = 3;
-//        int bound = (int) Math.pow(x, constant);
-//        int random = R.nextInt(bound);
-//        for (int i = x; i > 0; i--) {
-//            arr[i] = (int) (Math.pow(i, constant) + Math.pow(constant, i));
-//
-//        }
-//
-//        for (int i = x; i > 0; i--) {
-//            if (random >= arr[i - 1] && random <= arr[i]) {
-//                System.out.println(arr[i - 1] + " " + arr[i] + " " + random);
-//                return i;
-//            }
-//
-//        }
-//        return 0;
-//
-//    }
+
 
         public enum ObjectTypes  {
         WEAPON,
