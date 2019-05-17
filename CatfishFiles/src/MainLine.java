@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
+import jxl.write.WriteException;
 
 /*
     THE GAME EXECUTION STARTS HERE.
@@ -12,7 +13,7 @@ import java.util.Scanner;
  */
 public class MainLine {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, WriteException {
 
         Scanner in = new Scanner(System.in);
         Player P = new Player();
