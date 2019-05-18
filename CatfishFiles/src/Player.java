@@ -85,6 +85,6 @@ public final class Player {
         Prints a random dialogue from DeathDialoguesPlayer file
          */
         FileAccess F = new FileAccess();
-        return F.ResourceDirectory("DeathDialoguesPlayer");
+        return F.RandomTextfromFile("DeathDialoguesPlayer");
     }
 }

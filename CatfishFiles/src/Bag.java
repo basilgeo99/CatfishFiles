@@ -13,12 +13,58 @@
         CHANGES TO BE MADE :
  */
 
-
 public class Bag {
-    int maxweight;
 
-
-    Bag(){
-        maxweight = 30;
+    int maxWeight;            // weight will be as in the number of items you can carry
+    Object[] items;
+    int currWeight;
+    enum ObjectTypes  {
+        Weapon,
+        Potion,
+        GameObject        
     }
+
+    Bag() {
+        maxWeight = 12;
+        items = new Object[maxWeight];
+        currWeight = 0;
+    }
+
+    public boolean isFull() {
+        return currWeight >= maxWeight;
+    }
+
+    public boolean isEmpty() {
+        return currWeight <= 0;
+    }
+
+    public void inventory() {
+        
+        for(Object o : items){
+            
+            String type = getObjectClass(o);
+            
+            if(type.equalsIgnoreCase(ObjectTypes.Weapon.toString())){
+                Weapon W = (Weapon)o;
+                System.out.println(W.stats());
+            }
+            
+            
+        }
+
+    }
+
+    private String  getObjectClass(Object o)  {
+                
+        return o.getClass().getSimpleName();
+    }
+
+    /*
+          Object[] x = new Object[]{1,2,3,"srk"};
+                for(Object o: x){
+                  System.out.println(o.getClass());                                         > class  java.lang.Integer
+                  System.out.println(o.getClass().getName());                    > java.lang.Integer
+                  System.out.println(o.getClass().getSimpleName());       > Integer
+               }
+     */
 }
