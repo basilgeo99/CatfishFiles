@@ -1,0 +1,29 @@
+**THIS FILE HOLDS ALL CHANGES MADE BY THE DEVELOPERS**
++----------------------------------------------------+
+
+FORMAT :
+
+        DEVELOPER NAME
+        +-------------+
+        //date
+            -changes made
+
+
+Basil
++----+
+//15th May 2019
+    -Created project
+    -Created Player class, Enemy class, Weapon class,BattleEye clas, Main class
+    -Implemented basic battle mechanism
+
+//16th May 2019
+    -Created Appearance class,City class,WorldMap class,Forest class
+    -Created basic Player death dialogues, basic enemy death dialogues, basic forest entry dialogues
+        basic villager dialogues
+    -Implemented random access and display for the dialogues
+    -Appearance class for beautification of battle module and over all console text
+    -Made battleeye class more generic and easy to understand.
+Neil
++---+
+
+
