@@ -1,8 +1,10 @@
 package catfishfiles.MainPackage;
 
 
+import catfishfiles.MainPackage.FileOps.FileAccess;
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /*
     THIS CLASS HAS ATTRIBUTES AND FUNCTIONS PERTAINING TO ENEMIES IN THE GAME.
@@ -45,22 +47,22 @@ public class Enemy {
         return stats;
     }
 
-    public void defend(Player P) throws IOException {
-
-        int ap = P.attack();
-
-        hp = (ap > hp) ? 0 : (hp - ap);
-        System.out.println(P.name + " does " + ap + " damage.");
+    public void defend(Player P) throws IOException, InterruptedException {
+        TimeUnit.MILLISECONDS.sleep(500);
+        int ap = P.attack();                                        //attack points
+        hp = (ap > hp) ? 0 : (hp - ap);        
+        System.out.println("\n"+P.name + " does " + ap + " damage.");
         if (isAlive()) {
         } else {
-            System.out.print(death());
+            System.out.print("\n"+death());
         }
     }
 
-    public String death() throws IOException {
+    public String death() throws IOException, InterruptedException {
         /*
             Prints a random death dialogue for the enemy
          */
+        TimeUnit.MILLISECONDS.sleep(500);
         FileAccess F = new FileAccess();
         return name + F.RandomTextfromFile("DeathDialoguesEnemy");
     }

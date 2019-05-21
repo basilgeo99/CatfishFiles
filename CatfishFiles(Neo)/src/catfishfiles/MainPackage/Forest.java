@@ -1,6 +1,7 @@
 package catfishfiles.MainPackage;
 
 
+import catfishfiles.MainPackage.FileOps.FileAccess;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 

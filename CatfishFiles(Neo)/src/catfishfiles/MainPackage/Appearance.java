@@ -1,5 +1,7 @@
 package catfishfiles.MainPackage;
 
+import java.io.Serializable;
+
 
 /**
  * @author basilGeorge9oulose

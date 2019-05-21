@@ -1,6 +1,7 @@
 package catfishfiles.MainPackage;
 
 
+import java.io.Serializable;
 import java.util.Random;
 
 /*
@@ -12,12 +13,12 @@ import java.util.Random;
     CHANGES TO BE MADE :
         1. MUST INTRODUCE A WEIGHT ATTRIBUTE FOR BAG CLASS PURPOSES
  */
-public class Weapon {
+public class Weapon implements Serializable{
 
     String name;
     int dmg;
     int cost;
-    Random R = new Random();
+    
 
     public String stats() {
         String stats = "\nName : " + name + "\nDMG : " + dmg + "\nCost : " + cost;
@@ -25,6 +26,7 @@ public class Weapon {
     }
 
     public Weapon(String name, int cost, int minDamage, int maxDamage) {
+        Random R = new Random();
         this.name = name;
         this.dmg = R.nextInt(minDamage + maxDamage) + 1;
         this.cost = cost;

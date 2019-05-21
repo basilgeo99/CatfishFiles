@@ -1,6 +1,8 @@
 package catfishfiles.MainPackage;
 
 
+import catfishfiles.MainPackage.FileOps.FileAccess;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import jxl.write.WriteException;
@@ -15,17 +17,19 @@ import jxl.write.WriteException;
  */
 public class MainLine {
 
-    public static void main(String[] args) throws IOException, InterruptedException, WriteException {
-
+    public static void main(String[] args) throws IOException, InterruptedException, WriteException, FileNotFoundException, ClassNotFoundException {
+        FileAccess F = new FileAccess();
         Scanner in = new Scanner(System.in);
-        Player P = new Player();
+        Player P = new Player();        
 
         System.out.println("Name : ");
         P.name = in.nextLine();
         System.out.println();
+        P = F.LoadObject(P);
+        System.out.println( P.stats());
 
-        BattleEye B = new BattleEye(P);
-        B.BattleRequest("n");
+        BattleEye B = new BattleEye();
+        B.BattleRequest("normal",P);
 
     }
 

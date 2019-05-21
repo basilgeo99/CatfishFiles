@@ -1,6 +1,7 @@
 package catfishfiles.MainPackage;
 
 
+import catfishfiles.MainPackage.FileOps.FileAccess;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 

@@ -1,12 +1,13 @@
 package catfishfiles.MainPackage;
 
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  * A CLASS FOR ALL THE POTIONS IN THE GAME
  */
-public class Potion {
+public class Potion implements Serializable{
 
     String name;
     int value;          // either + or - depending on whether it is an elixir or poison

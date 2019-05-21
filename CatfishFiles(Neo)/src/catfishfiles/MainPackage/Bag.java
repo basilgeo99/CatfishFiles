@@ -1,6 +1,7 @@
 package catfishfiles.MainPackage;
 
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -20,12 +21,10 @@ import java.util.Scanner;
 
         CHANGES TO BE MADE :
  */
-public class Bag {
+public class Bag implements Serializable {
 
     LinkedList<Potion> PBag = new LinkedList<>();
     LinkedList<Weapon> WBag = new LinkedList<>();
-    Appearance A = new Appearance();
-    Scanner in = new Scanner(System.in);
 
     public void addToBag(Object o) {
         if (o.getClass().getSimpleName().equalsIgnoreCase("weapon")) {
@@ -38,12 +37,14 @@ public class Bag {
     }
 
     public void listAll() {
+        Appearance A = new Appearance();
         A.putInBox("BAG", 'b');
         listPotions();
         listWeapons();
     }
 
     public void listPotions() {
+        Appearance A = new Appearance();
         A.underLine("POTIONS", '=');
         int size = PBag.size();
         for (int i = 0; i < size; i++) {
@@ -53,6 +54,7 @@ public class Bag {
     }
 
     public void listWeapons() {
+        Appearance A = new Appearance();
         A.underLine("WEAPONS", '=');
         int size = WBag.size();
         for (int i = 0; i < size; i++) {
