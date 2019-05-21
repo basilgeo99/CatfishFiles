@@ -9,6 +9,7 @@ import java.util.Random;
 import jxl.write.WriteException;
 import java.util.Scanner;
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 /*
  *  THIS CLASS DEALS WITH EXTERNAL FILE ACCESS
@@ -30,10 +31,28 @@ public class FileAccess {
      */
     public enum FileType {
         SAVE,
-        RESOURCE
+        RESOURCE,
+        ART
     }
 
-    public String RandomTextfromFile(String fileName) throws IOException {
+    public void printArt(String fileName) throws IOException, InterruptedException {
+        String home = ResourceDirectory(FileType.ART);
+        String fileLocation = home + fileName;
+        FileReader filereader = new FileReader(fileLocation);
+        try (BufferedReader bufferedReader = new BufferedReader(filereader)) {
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                System.out.println(line);
+                 TimeUnit.MILLISECONDS.sleep(100);
+                line = bufferedReader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+        }
+
+    }
+
+    public String RandomDialogue(String fileName) throws IOException {
 
         String home = ResourceDirectory(FileType.RESOURCE);
         String fileLocation = home + fileName;
@@ -56,9 +75,7 @@ public class FileAccess {
         } catch (IOException e) {
             // exception handling
         }
-
         return "";
-
     }
 
     public String ResourceDirectory(FileType type) throws IOException {
@@ -70,6 +87,8 @@ public class FileAccess {
             folder = "resources";
         } else if (type.equals(FileType.SAVE)) {
             folder = "saves";
+        } else if (type.equals(FileType.ART)) {
+            folder = "art";
         }
 
         if (os.contains("Linux")) {
@@ -136,7 +155,7 @@ public class FileAccess {
             char ch = sc.next().charAt(0);
             if (ch == 'y' || ch == 'Y') {
                 ObjectIO Obj = new ObjectIO();
-                P =  Obj.readObject(input);
+                P = Obj.readObject(input);
             }
         }
 

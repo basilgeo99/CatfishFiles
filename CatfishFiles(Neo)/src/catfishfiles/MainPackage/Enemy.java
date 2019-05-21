@@ -64,7 +64,7 @@ public class Enemy {
          */
         TimeUnit.MILLISECONDS.sleep(500);
         FileAccess F = new FileAccess();
-        return name + F.RandomTextfromFile("DeathDialoguesEnemy");
+        return name + F.RandomDialogue("DeathDialoguesEnemy");
     }
 
     public static Enemy newRandomInstance() {
@@ -103,7 +103,7 @@ public class Enemy {
                 return new Enemy("Dragon", 82, 13, 30);
 
             case 1:
-                return new Enemy("Undead King", 66, 12, 24);
+                return new Enemy("Centaur King", 66, 12, 24);
 
             case 2:
                 return new Enemy("Goblin Warlord", 58, 10, 22);

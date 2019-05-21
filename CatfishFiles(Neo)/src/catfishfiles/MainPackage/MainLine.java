@@ -19,10 +19,11 @@ public class MainLine {
 
     public static void main(String[] args) throws IOException, InterruptedException, WriteException, FileNotFoundException, ClassNotFoundException {
         FileAccess F = new FileAccess();
+        F.printArt("TEST");
         Scanner in = new Scanner(System.in);
         Player P = new Player();        
 
-        System.out.println("Name : ");
+        System.out.println("\nName : ");
         P.name = in.nextLine();
         System.out.println();
         P = F.LoadObject(P);
