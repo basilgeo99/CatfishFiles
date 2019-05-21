@@ -84,7 +84,7 @@ public final class Player implements Serializable{
          */
         TimeUnit.MILLISECONDS.sleep(500);
         FileAccess F = new FileAccess();
-        return F.RandomTextfromFile("DeathDialoguesPlayer");
+        return F.RandomDialogue("DeathDialoguesPlayer");
     }
 
     public void bagAccess() {

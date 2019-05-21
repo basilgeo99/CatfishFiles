@@ -29,7 +29,7 @@ public class Forest {
         A.putInBox(text, '+');
         TimeUnit.SECONDS.sleep(1);
         System.out.println(" \"\" ");
-        System.out.print(F.RandomTextfromFile("ForestStories"));
+        System.out.print(F.RandomDialogue("ForestStories"));
         System.out.println(" \"\" ");
     }
 
