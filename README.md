@@ -14,5 +14,7 @@ A simple text-based RPG built using JAVA.
     
 # NOTICE
   Discontinued project due to lack of time and interest.
+  
   Might restart later.
+  
   Feel free to take it up :)
